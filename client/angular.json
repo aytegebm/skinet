@@ -129,5 +129,10 @@
       }
     }
   },
-  "defaultProject": "client"
+  "defaultProject": "client",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  }
 }

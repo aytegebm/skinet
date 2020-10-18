@@ -2,16 +2,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
-using Core.Interfaces;
 using AutoMapper;
 using API.Helpers;
 using API.Middleware;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using API.Errors;
 using API.Extensions;
 
 namespace API
@@ -36,6 +31,8 @@ namespace API
             
             services.AddApplicationServices();
 
+            services.AddSwaggerDocumentation();
+
             services.AddCors(opt => 
             {
                 opt.AddPolicy("CorsPolicy", policy => 
@@ -43,6 +40,8 @@ namespace API
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
                 });
             });
+
+           
             
         }
 
@@ -62,6 +61,8 @@ namespace API
             app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
+
+            app.UseswaggerDocumentation();
 
             app.UseEndpoints(endpoints =>
             {
