@@ -34,6 +34,7 @@ export class BasketService {
     return this.http.post(this.baseUrl + 'basket', basket).subscribe((response: IBasket) => {
       this.basketSource.next(response);
       this.calculateTotals();
+      // console.log(response);
     }, error => {
       console.log(error);
     });
@@ -59,6 +60,7 @@ export class BasketService {
     const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
     basket.items[foundItemIndex].quantity++;
     this.setBasket(basket);
+    console.log('basket value ' + basket.items[foundItemIndex].quantity);
   }
 
   // tslint:disable-next-line: typedef

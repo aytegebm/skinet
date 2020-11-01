@@ -18,7 +18,7 @@ export class ProductDetailsComponent implements OnInit {
               private activateRoute: ActivatedRoute,
               private bcService: BreadcrumbService,
               private basketService: BasketService) {
-    this.bcService.set('@productDetails', '');
+    this.bcService.set('@productDetails', ' ');
   }
 
   // tslint:disable-next-line: typedef
