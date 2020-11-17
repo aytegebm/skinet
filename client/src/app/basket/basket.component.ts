@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IBasket, IBasketItem } from '../shared/models/basket';
+import { OrdersService } from '../orders/orders.service';
+import { IBasket, IBasketItem, IBasketTotals } from '../shared/models/basket';
+import { IOrder } from '../shared/models/order';
 import { BasketService } from './basket.service';
 
 @Component({
@@ -9,13 +11,18 @@ import { BasketService } from './basket.service';
   styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit {
+  @Input() shippingPrice: number;
+  @Input() subtotal: number;
+  @Input() total: number;
   basket$: Observable<IBasket>;
+  basketTotals$: Observable<IBasketTotals>;
 
-  constructor(private basketService: BasketService) { }
+  constructor(private basketService: BasketService, private ordersService: OrdersService) { }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
     this.basket$ = this.basketService.basket$;
+    this.basketTotals$ = this.basketService.basketTotal$;
   }
 
   // tslint:disable-next-line: typedef

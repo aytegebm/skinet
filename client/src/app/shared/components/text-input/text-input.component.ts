@@ -34,7 +34,11 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
 
   writeValue(obj: any): void {
     // throw new Error('Method not implemented.');
-    this.writeValue = obj;
+    if (obj !== null || obj !== undefined) {
+        // this.writeValue = obj;
+        this.onChange(obj);
+        this.onTouched();
+    }
   }
   registerOnChange(fn: any): void {
     // throw new Error('Method not implemented.');
@@ -48,6 +52,5 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     // throw new Error('Method not implemented.');
     this.setDisabledState(isDisabled);
   }
-
 
 }
