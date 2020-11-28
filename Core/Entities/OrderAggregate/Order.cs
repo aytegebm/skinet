@@ -22,7 +22,7 @@ namespace Core.Entities.OrderAggregate
             ShipToAddress = shipToAddress;
             DeliveryMethod = deliveryMethod;
             SubTotal = subTotal;
-            PaymentIntentId = PaymentIntentId;
+            PaymentIntentId = paymentIntentId;
         }
 
         public string BuyerEmail { get; set; }
@@ -43,8 +43,7 @@ namespace Core.Entities.OrderAggregate
         
         public decimal GetTotal() 
         {
-            decimal total = SubTotal + DeliveryMethod.Price;
-            return total;
+            return SubTotal + DeliveryMethod.Price;
         }
     }
 }

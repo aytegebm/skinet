@@ -23,16 +23,12 @@
         <i class="fa fa-angle-left"></i> Back to Review
     </button>
     <button [disabled]="loading 
-        || checkoutForm.get('paymentForm').invalid 
-        || !cardNumberValid 
-        || !cardExpiryValid 
-        || !cardCvcValid" 
+        || checkoutForm.get('paymentForm').invalid
+        || !cardNumberValid
+        || !cardExpiryValid
+        || !cardCvcValid"
         (click)="submitOrder()" class="btn btn-primary">
-        Submit Order <i class="fa fa-angle-right"></i> 
+        Submit Order <i class="fa fa-angle-right"></i>
         <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
     </button>
-</div>
-<div>
-    <p>paymentForm  {{checkoutForm.get('paymentForm').invalid}}</p>
-    <p>cardNumberValid  {{cardNumberValid}}</p>
 </div>

@@ -4,6 +4,7 @@ import { OrdersComponent } from './orders.component';
 import { OrderDetailedComponent } from './order-detailed/order-detailed.component';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { BasketRoutingModule } from '../basket/basket-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -16,7 +17,8 @@ import { BasketRoutingModule } from '../basket/basket-routing.module';
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    BasketRoutingModule
+    BasketRoutingModule,
+    SharedModule
   ]
 })
 export class OrdersModule { }

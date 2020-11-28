@@ -20,11 +20,13 @@ export class BasketService {
 
   constructor(private http: HttpClient) { }
 
-  createPaymentIntent(): any {
+  // tslint:disable-next-line: typedef
+  createPaymentIntent() {
     return this.http.post(this.baseUrl + 'payments/' + this.getCurrentBasketValue().id, {})
       .pipe(
         map((basket: IBasket) => {
           this.basketSource.next(basket);
+          console.log(this.getCurrentBasketValue());
         })
       );
   }
@@ -56,7 +58,6 @@ export class BasketService {
     return this.http.post(this.baseUrl + 'basket', basket).subscribe((response: IBasket) => {
       this.basketSource.next(response);
       this.calculateTotals();
-      // console.log(response);
     }, error => {
       console.log(error);
     });
@@ -82,7 +83,6 @@ export class BasketService {
     const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
     basket.items[foundItemIndex].quantity++;
     this.setBasket(basket);
-    console.log('basket value ' + basket.items[foundItemIndex].quantity);
   }
 
   // tslint:disable-next-line: typedef
@@ -117,6 +117,7 @@ export class BasketService {
     const subTotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
     const total = subTotal + shipping;
     this.basketTotalSource.next({shipping, total, subTotal});
+    // return total;
   }
 
   private addOrUpdateItem(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {

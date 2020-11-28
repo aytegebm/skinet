@@ -6,7 +6,7 @@ import { BasketService } from 'src/app/basket/basket.service';
 import { IBasket } from 'src/app/shared/models/basket';
 import { CheckoutService } from '../checkout.service';
 
-declare var Stripe;
+declare var Stripe: any;
 
 @Component({
   selector: 'app-checkout-payment',
@@ -33,7 +33,7 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
       private basketService: BasketService,
       private checkoutService: CheckoutService,
       private toastr: ToastrService,
-      private router: Router) { }
+      private router: Router) {}
 
   ngAfterViewInit(): void {
     this.stripe = Stripe('pk_test_51HlqJSIBEb1uTZy4ERY94r9LVKU90RdgZoW2Wkzs0J4EoZrXmUx6kBvtzpjovbD8wgrWDjiFvVgDqGs4Go0HSUyV00nYdAEE7f');
@@ -56,7 +56,6 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     this.cardNumber.destroy();
     this.cardExpiry.destroy();
     this.cardCvc.destroy();
-
   }
 
   // tslint:disable-next-line: typedef
@@ -115,9 +114,8 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
 
   // tslint:disable-next-line: typedef
   private async createOrder(basket: IBasket) {
-    let orderToCreate;
+    let orderToCreate: any;
     orderToCreate = this.getOrderToCreate(basket);
-    // console.log('Order to create: ' + orderToCreate);
     return this.checkoutService.createOrder(orderToCreate).toPromise();
   }
 
@@ -125,7 +123,7 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   private getOrderToCreate(basket: IBasket) {
     return {
       basketId: basket.id,
-      deliveryMehodId: +this.checkoutForm.get('deliveryForm').get('deliveryMethod').value,
+      deliveryMethodId: +this.checkoutForm.get('deliveryForm').get('deliveryMethod').value,
       shipToAddress: this.checkoutForm.get('addressForm').value
     };
   }

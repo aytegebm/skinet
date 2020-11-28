@@ -32,7 +32,7 @@ namespace API.Controllers
 
             return basket;
         }
-
+        
         [HttpPost("webhook")]
         public async Task<ActionResult> StripeWebhook()
         {
@@ -52,7 +52,7 @@ namespace API.Controllers
                     _logger.LogInformation("Order updated to payment received: ", order.Id);
                     break;
                 case "payment_intent.payment_failed":
-                    intent = (PaymentIntent)stripeEvent.Data.Object; 
+                    intent = (PaymentIntent) stripeEvent.Data.Object; 
                     _logger.LogInformation("Payment Failed: ", intent.Id);
                     order = await _paymentService.UpdateOrderPaymentFailed(intent.Id);
                     _logger.LogInformation("Payment Failed: ", order.Id);
@@ -60,7 +60,6 @@ namespace API.Controllers
             }
 
             return new EmptyResult();
-
         }
     }
 }

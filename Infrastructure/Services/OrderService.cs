@@ -54,7 +54,7 @@ namespace Infrastructure.Services
             var order = new Order(items, buyerEmail, shipingAddress, deliveryMethod, subTotal, basket.PaymentIntentId);
             _unitOfWork.Repository<Order>().Add(order);
 
-            //TODO: save to db
+            //save to db
             var result = await _unitOfWork.Complete();
 
             if (result <= 0) return null;

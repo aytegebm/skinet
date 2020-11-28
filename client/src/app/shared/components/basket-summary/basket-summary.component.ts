@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IBasketItem } from '../../models/basket';
+import { Observable } from 'rxjs';
+import { BasketService } from 'src/app/basket/basket.service';
+import { IBasket, IBasketItem } from '../../models/basket';
 import { IOrderItem } from '../../models/order';
 
 @Component({
@@ -17,8 +19,7 @@ export class BasketSummaryComponent implements OnInit {
 
   constructor() { }
 
-  // tslint:disable-next-line: typedef
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   // tslint:disable-next-line: typedef
